@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Daftar Anggota</h1>
+  <a href="{% url 'tambah_anggota' %}">Tambah Anggota</a>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Nama Anggota</th>
+        <th>No. Telepon</th>
+        <th>Alamat</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for anggota in anggota_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ anggota.nama_anggota }}</td>
+          <td>{{ anggota.no_telepon }}</td>
+          <td>{{ anggota.alamat }}</td>
+          <td>
+            <a href="{% url 'ubah_anggota' anggota.id %}">Ubah</a>
+            <a href="{% url 'hapus_anggota' anggota.id %}">Hapus</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

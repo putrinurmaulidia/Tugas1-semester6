@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Daftar Buku</h1>
+  <a href="{% url 'tambah_buku' %}">Tambah Buku</a>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Judul Buku</th>
+        <th>Rak Buku</th>
+        <th>Penerbit</th>
+        <th>Pengarang</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for buku in buku_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ buku.judul_buku }}</td>
+          <td>{{ buku.rak_buku }}</td>
+          <td>{{ buku.penerbit }}</td>
+          <td>
+            {% for pengarang in buku.pengarang.all %}
+              {{ pengarang.nama_pengarang }}<br>
+            {% empty %}
+              Belum ada pengarang
+            {% endfor %}
+          </td>
+          <td>
+            <a href="{% url 'ubah_buku' buku.id %}">Ubah</a>
+            <a href="{% url 'hapus_buku' buku.id %}">Hapus</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
